@@ -1,4 +1,4 @@
-# Portfolio Website
+# Ifemipo's Portfolio
 
 This is a personal portfolio website showcasing 3D models, motion design works, images, and videos. The site features a clean, modern UI with smooth animations and an interactive lightbox for media display.
 
