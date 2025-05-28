@@ -1,514 +1,517 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ifemipo Onashoga | Portfolio</title>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ifemipo Onashoga | Portfolio</title>
 
-  <!-- Google Fonts: Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Animate.css -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <!-- Animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
 
-  <style>
-    :root {
-      --okau: #FBBF24;
-      --softWhite: #E0E0E0;
-    }
-
-    body {
-      font-family: "Poppins", sans-serif;
-      color: var(--softWhite);
-      background-color: #1a202c; /* Tailwind's gray-900 */
-      scroll-behavior: smooth;
-    }
-
-    .text-okau {
-      color: var(--okau);
-    }
-
-    .bg-okau {
-      background-color: var(--okau);
-    }
-
-    /* Lightbox Styles */
-    #lightboxOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(10px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      padding: 20px;
-    }
-
-    #lightboxContent {
-      max-width: 90vw;
-      max-height: 90vh;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 30px var(--okau);
-      animation: fadeScaleIn 0.3s ease forwards;
-      position: relative;
-    }
-
-    #lightboxContent img,
-    #lightboxContent video {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 12px;
-    }
-
-    #lightboxCloseBtn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--okau);
-      border: none;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      cursor: pointer;
-      font-weight: 800;
-      color: #1a202c;
-      font-size: 20px;
-      line-height: 36px;
-      text-align: center;
-      transition: background-color 0.3s ease;
-      z-index: 10;
-    }
-
-    #lightboxCloseBtn:hover {
-      background-color: #d4af37;
-    }
-
-    @keyframes fadeScaleIn {
-      0% {
-        opacity: 0;
-        transform: scale(0.95);
+    <style>
+      :root {
+        --okau: #FBBF24;
+        --softWhite: #E0E0E0;
       }
-      100% {
-        opacity: 1;
-        transform: scale(1);
+
+      body {
+        font-family: "Poppins", sans-serif;
+        color: var(--softWhite);
+        background-color: #1a202c; /* Tailwind's gray-900 */
+        scroll-behavior: smooth;
       }
-    }
 
-    /* Masonry-like scattered grid layout */
-    #projectsGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      grid-auto-rows: 200px;
-      gap: 15px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      /* For scattered effect: use grid-auto-flow dense */
-      grid-auto-flow: dense;
-    }
+      .text-okau {
+        color: var(--okau);
+      }
 
-    /* Vary size of grid items to create scattered effect */
-    #projectsGrid > div:nth-child(5n + 1) {
-      grid-row: span 2;
-      grid-column: span 2;
-    }
+      .bg-okau {
+        background-color: var(--okau);
+      }
+      
+      #lightboxOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        padding: 20px;
+      }
 
-    #projectsGrid > div:nth-child(4n + 3) {
-      grid-row: span 1;
-      grid-column: span 2;
-    }
+      #lightboxContent {
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 0 30px var(--okau);
+        animation: fadeScaleIn 0.3s ease forwards;
+        position: relative;
+      }
 
-    #projectsGrid > div {
-      position: relative;
-      cursor: pointer;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
-      transition: transform 0.4s ease, filter 0.4s ease;
-    }
+      #lightboxContent img,
+      #lightboxContent video {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 12px;
+      }
 
-    #projectsGrid > div:hover {
-      transform: scale(1.05) rotate(2deg);
-      filter: brightness(1.1);
-      z-index: 2;
-      box-shadow: 0 10px 30px rgba(251, 191, 36, 0.8);
-    }
+      #lightboxCloseBtn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: var(--okau);
+        border: none;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        cursor: pointer;
+        font-weight: 800;
+        color: #1a202c;
+        font-size: 20px;
+        line-height: 36px;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        z-index: 10;
+      }
 
-    #projectsGrid img,
-    #projectsGrid video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-      pointer-events: none;
-      user-select: none;
-      transition: transform 0.5s ease;
-    }
+      #lightboxCloseBtn:hover {
+        background-color: #d4af37;
+      }
 
-    /* Overlay on video thumbnails */
-    #projectsGrid video + div {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.3);
-      border-radius: 12px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
+      @keyframes fadeScaleIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
 
-    #projectsGrid > div:hover video + div {
-      opacity: 1;
-    }
-
-    /* Responsive tweaks */
-    @media (max-width: 640px) {
+      /* Masonry-like scattered grid layout */
       #projectsGrid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        grid-auto-rows: 140px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-auto-rows: 200px;
+        gap: 15px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        /* For scattered effect: use grid-auto-flow dense */
+        grid-auto-flow: dense;
       }
 
-      #projectsGrid > div:nth-child(5n + 1),
+      /* Vary size of grid items to create scattered effect */
+      #projectsGrid > div:nth-child(5n + 1) {
+        grid-row: span 2;
+        grid-column: span 2;
+      }
+
       #projectsGrid > div:nth-child(4n + 3) {
-        grid-column: span 1;
         grid-row: span 1;
+        grid-column: span 2;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <!-- Header -->
-  <header
-    class="flex justify-between items-center p-6 max-w-7xl mx-auto"
-  >
-    <h1 class="text-2xl font-bold tracking-wide text-white">Ifemipo Onashoga</h1>
-    <nav>
-      <ul class="flex space-x-6 text-white/80 font-bold">
-        <li><a href="#home" class="hover:text-okau transition">Home</a></li>
-        <li><a href="about.html" class="hover:text-okau transition">About Me</a></li>
-        <li><a href="#projects" class="hover:text-okau transition">Projects</a></li>
-        <li><a href="#contact" class="hover:text-okau transition">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+      #projectsGrid > div {
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+        transition: transform 0.4s ease, filter 0.4s ease;
+      }
 
-  <!-- Hero Section -->
-  <section
-    id="home"
-    class="relative h-screen bg-cover bg-center flex flex-col justify-center items-center text-center"
-    style="
-      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80');
-    "
-  >
-    <div class="bg-black bg-opacity-60 p-8 rounded-lg max-w-3xl">
-      <h2
-        class="text-5xl font-extrabold mb-4 animate__animated animate__fadeInDown"
-      >
-        Hi, I'm Ifemipo Onashoga
-      </h2>
-      <p class="text-2xl mb-8 animate__animated animate__fadeInUp">
-        3D Blender Artist & UI Designer integrating 3D into web development
-      </p>
-      <a
-        href="#projects"
-        class="inline-block bg-okau text-gray-900 px-6 py-3 font-semibold rounded shadow-lg hover:bg-opacity-90 transition"
-        >See My Work</a
-      >
-    </div>
-  </section>
+      #projectsGrid > div:hover {
+        transform: scale(1.05) rotate(2deg);
+        filter: brightness(1.1);
+        z-index: 2;
+        box-shadow: 0 10px 30px rgba(251, 191, 36, 0.8);
+      }
 
-  <!-- Projects Section -->
-  <section
-    id="projects"
-    class="relative bg-gray-900/80 py-20 px-8 mt-12 overflow-hidden"
-  >
-    <!-- Animated Backdrop -->
-    <div
-      class="absolute inset-0 bg-gradient-to-br from-yellow-400 via-purple-500 to-pink-500 opacity-10 blur-2xl animate-[pulse_8s_ease-in-out_infinite]"
-    ></div>
+      #projectsGrid img,
+      #projectsGrid video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+        pointer-events: none;
+        user-select: none;
+        transition: transform 0.5s ease;
+      }
 
-    <div class="relative z-10 max-w-6xl mx-auto text-center">
-      <h2
-        class="text-5xl font-extrabold text-okau mb-4 tracking-wider"
-      >
-        My Projects
-      </h2>
-      <p
-        class="text-xl font-semibold text-gray-300 mb-12 max-w-xl mx-auto"
-      >
-        This overview shows my work in Blender for animation, product modeling,
-        and product design.
-      </p>
+      /* Overlay on video thumbnails */
+      #projectsGrid video + div {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.3);
+        border-radius: 12px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
 
-      <!-- Masonry-like Grid of Projects -->
-      <div id="projectsGrid" aria-label="Project gallery">
-        <!-- Images -->
-        <div class="group">
-          <img src="images/work1.png" alt="Work 1" loading="lazy" />
-        </div>
-        <div class="group">
-          <img src="images/work2.png" alt="Work 2" loading="lazy" />
-        </div>
-        <div class="group">
-          <img src="images/work3.png" alt="Work 3" loading="lazy" />
-        </div>
-        <div class="group">
-          <img src="images/work4.png" alt="Work 4" loading="lazy" />
-        </div>
-        <div class="group">
-          <img src="images/work5.png" alt="Work 5" loading="lazy" />
-        </div>
-      
-        <!-- Videos -->
-        <div class="group">
-          <video width="600" autoplay muted loop playsinline poster="images/preview1.jpg">
-            <source src="videos/demo1.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      
-        <div class="group">
-          <video width="600" autoplay muted loop playsinline poster="images/preview2.jpg">
-            <source src="videos/demo2.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      
-        <div class="group">
-          <video width="600" autoplay muted loop playsinline poster="images/preview3.jpg">
-            <source src="videos/demo3.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      
-        <div class="group">
-          <video width="600" autoplay muted loop playsinline poster="images/preview4.jpg">
-            <source src="videos/demo4.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      
-        <div class="group">
-          <video width="600" autoplay muted loop playsinline poster="images/preview5.jpg">
-            <source src="videos/demo5.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
+      #projectsGrid > div:hover video + div {
+        opacity: 1;
+      }
+
+      /* Responsive tweaks */
+      @media (max-width: 640px) {
+        #projectsGrid {
+          grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+          grid-auto-rows: 140px;
+        }
+
+        #projectsGrid > div:nth-child(5n + 1),
+        #projectsGrid > div:nth-child(4n + 3) {
+          grid-column: span 1;
+          grid-row: span 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header
+      class="flex justify-between items-center p-6 max-w-7xl mx-auto"
+    >
+      <h1 class="text-2xl font-bold tracking-wide text-white">Ifemipo Onashoga</h1>
+       <nav class="relative">
+  <button id="menuToggle" class="sm:hidden text-white focus:outline-none">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </button>
+  <ul id="menuList"
+      class="hidden sm:flex flex-col sm:flex-row absolute sm:static top-14 right-0 bg-gray-800 sm:bg-transparent space-y-4 sm:space-y-0 sm:space-x-6 p-4 sm:p-0 rounded-md z-50 text-white/80 font-bold shadow-lg sm:shadow-none">
+    <li><a href="#home" class="hover:text-okau transition">Home</a></li>
+    <li><a href="about.html" class="hover:text-okau transition">About Me</a></li>
+    <li><a href="#projects" class="hover:text-okau transition">Projects</a></li>
+    <li><a href="#contact" class="hover:text-okau transition">Contact</a></li>
+  </ul>
+</nav>
+
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="relative h-screen bg-cover bg-center flex flex-col justify-center items-center text-center"
+      style="
+        background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80');
+      "
+    >
+      <div class="bg-black bg-opacity-60 p-8 rounded-lg max-w-3xl">
+        <h2
+          class="text-5xl font-extrabold mb-4 animate__animated animate__fadeInDown"
+        >
+          Hi, I'm Ifemipo Onashoga
+        </h2>
+        <p class="text-2xl mb-8 animate__animated animate__fadeInUp">
+          3D Blender Artist & UI Designer integrating 3D into web development
+        </p>
+        <a
+          href="#projects"
+          class="inline-block bg-okau text-gray-900 px-6 py-3 font-semibold rounded shadow-lg hover:bg-opacity-90 transition"
+          >See My Work</a
+        >
       </div>
-      
-      
+    </section>
+
+    <!-- Projects Section -->
+    <section
+      id="projects"
+      class="relative bg-gray-900/80 py-20 px-8 mt-12 overflow-hidden"
+    >
+      <!-- Animated Backdrop -->
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-yellow-400 via-purple-500 to-pink-500 opacity-10 blur-2xl animate-[pulse_8s_ease-in-out_infinite]"
+      ></div>
+
+      <div class="relative z-10 max-w-6xl mx-auto text-center">
+        <h2
+          class="text-5xl font-extrabold text-okau mb-4 tracking-wider"
+        >
+          My Projects
+        </h2>
+        <p
+          class="text-xl font-semibold text-gray-300 mb-12 max-w-xl mx-auto"
+        >
+          This overview shows my work in Blender for animation, product modeling,
+          and product design.
+        </p>
+
+        <!-- Masonry-like Grid of Projects -->
+        <div id="projectsGrid" aria-label="Project gallery">
+          <!-- Images -->
+          <div class="group">
+            <img src="images/work1.png" alt="Work 1" loading="lazy" />
+          </div>
+          <div class="group">
+            <img src="images/work2.png" alt="Work 2" loading="lazy" />
+          </div>
+          <div class="group">
+            <img src="images/work3.png" alt="Work 3" loading="lazy" />
+          </div>
+          <div class="group">
+            <img src="images/work4.png" alt="Work 4" loading="lazy" />
+          </div>
+          <div class="group">
+            <img src="images/work5.png" alt="Work 5" loading="lazy" />
+          </div>
+        
+          <!-- Videos -->
+          <div class="group">
+            <video width="600" autoplay muted loop playsinline poster="images/preview1.jpg">
+              <source src="videos/demo1.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        
+          <div class="group">
+            <video width="600" autoplay muted loop playsinline poster="images/preview2.jpg">
+              <source src="videos/demo2.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        
+          <div class="group">
+            <video width="600" autoplay muted loop playsinline poster="images/preview3.jpg">
+              <source src="videos/demo3.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        
+          <div class="group">
+            <video width="600" autoplay muted loop playsinline poster="images/preview4.jpg">
+              <source src="videos/demo4.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        
+          <div class="group">
+            <video width="600" autoplay muted loop playsinline poster="images/preview5.jpg">
+              <source src="videos/demo5.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+        
+        
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightboxOverlay" tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true">
+      <div id="lightboxContent">
+        <button id="lightboxCloseBtn" aria-label="Close lightbox">&times;</button>
+      </div>
     </div>
-  </section>
 
-  <!-- Lightbox -->
-  <div id="lightboxOverlay" tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true">
-    <div id="lightboxContent">
-      <button id="lightboxCloseBtn" aria-label="Close lightbox">&times;</button>
-    </div>
-  </div>
+    <script>
+  const lightboxOverlay = document.getElementById('lightboxOverlay');
+  const lightboxContent = document.getElementById('lightboxContent');
+  const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
 
-  <script>
-    // Setup videos to load poster and small preview inside the grid
-    document.querySelectorAll('#projectsGrid div[data-type="video"]').forEach(div => {
-      const videoUrl = div.dataset.src;
-      const poster = div.dataset.poster;
-      const video = div.querySelector('video');
-      video.src = videoUrl;
-      video.poster = poster;
-      video.muted = true;
-      video.loop = true;
-      video.autoplay = true;
-      video.playsInline = true;
-      video.load();
-    });
+  // Open lightbox on click
+  document.querySelectorAll('#projectsGrid > div').forEach(item => {
+    item.addEventListener('click', () => {
+      const type = item.dataset.type;
+      const src = item.dataset.src;
 
-    // Lightbox logic
-    const lightboxOverlay = document.getElementById('lightboxOverlay');
-    const lightboxContent = document.getElementById('lightboxContent');
-    const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
-
-    document.querySelectorAll('#projectsGrid > div').forEach(item => {
-      item.addEventListener('click', () => {
-        // Clear previous content
-        while (lightboxContent.children.length > 1) {
-          lightboxContent.removeChild(lightboxContent.lastChild);
-        }
-
-        const type = item.dataset.type;
-        const src = item.dataset.src;
-
-        if (type === 'image') {
-          const img = document.createElement('img');
-          img.src = src;
-          img.alt = 'Lightbox Image';
-          lightboxContent.appendChild(img);
-        } else if (type === 'video') {
-          const video = document.createElement('video');
-          video.src = src;
-          video.controls = true;
-          video.autoplay = true;
-          video.loop = true;
-          video.muted = false;
-          video.style.borderRadius = '12px';
-          lightboxContent.appendChild(video);
-        }
-
-        lightboxOverlay.style.display = 'flex';
-        lightboxOverlay.setAttribute('aria-hidden', 'false');
-        lightboxCloseBtn.focus();
+      // Clear previous content except the close button
+      [...lightboxContent.children].forEach(child => {
+        if (child !== lightboxCloseBtn) child.remove();
       });
-    });
 
-    lightboxCloseBtn.addEventListener('click', () => {
+      if (type === 'image') {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = 'Lightbox Image';
+        lightboxContent.appendChild(img);
+      } else if (type === 'video') {
+        const video = document.createElement('video');
+        video.src = src;
+        video.controls = true;
+        video.autoplay = true;
+        video.loop = true;
+        video.muted = false;
+        video.style.borderRadius = '12px';
+        video.style.maxWidth = '100%';
+        video.style.maxHeight = '80vh';
+        lightboxContent.appendChild(video);
+      }
+
+      lightboxOverlay.style.display = 'flex';
+      lightboxOverlay.setAttribute('aria-hidden', 'false');
+      lightboxCloseBtn.focus();
+    });
+  });
+
+  // Close lightbox
+  lightboxCloseBtn.addEventListener('click', () => {
+    lightboxOverlay.style.display = 'none';
+    lightboxOverlay.setAttribute('aria-hidden', 'true');
+  });
+
+  // Close on overlay click (optional)
+  lightboxOverlay.addEventListener('click', (e) => {
+    if (e.target === lightboxOverlay) {
       lightboxOverlay.style.display = 'none';
       lightboxOverlay.setAttribute('aria-hidden', 'true');
-      // Pause any playing video inside lightbox
-      const video = lightboxContent.querySelector('video');
-      if (video) video.pause();
-    });
-
-    // Close lightbox when clicking outside content
-    lightboxOverlay.addEventListener('click', (e) => {
-      if (e.target === lightboxOverlay) {
-        lightboxCloseBtn.click();
-      }
-    });
-
-    // Close lightbox on Escape key press
-    document.addEventListener('keydown', (e) => {
-      if (e.key === "Escape" && lightboxOverlay.style.display === 'flex') {
-        lightboxCloseBtn.click();
-      }
-    });
-  </script>a
-  <!-- Contact Section -->
-  <section id="contact" class="max-w-3xl mx-auto my-20 p-10 bg-gray-800 rounded-3xl shadow-2xl text-center text-softWhite">
-    <h2 class="text-5xl font-extrabold text-okau mb-8 tracking-wide drop-shadow-lg">
-      Contact Me
-    </h2>
-  
-    <form action="https://formspree.io/f/your-form-id" method="POST" class="flex flex-col gap-6 max-w-xl mx-auto text-left">
-      <label class="block font-semibold text-lg text-gray-300 mb-1" for="name">Your Name</label>
-      <input
-        id="name"
-        type="text"
-        name="name"
-        placeholder="Enter your full name"
-        required
-        class="p-4 rounded-xl text-gray-900 font-semibold placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-okau focus:ring-opacity-60 transition-shadow shadow-md"
-      />
-  
-      <label class="block font-semibold text-lg text-gray-300 mb-1" for="email">Your Email</label>
-      <input
-        id="email"
-        type="email"
-        name="email"
-        placeholder="Enter your email address"
-        required
-        class="p-4 rounded-xl text-gray-900 font-semibold placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-okau focus:ring-opacity-60 transition-shadow shadow-md"
-      />
-  
-      <label class="block font-semibold text-lg text-gray-300 mb-1" for="message">Your Message</label>
-      <textarea
-        id="message"
-        name="message"
-        placeholder="Write your message here"
-        rows="6"
-        required
-        class="p-4 rounded-xl text-gray-900 font-semibold placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-okau focus:ring-opacity-60 transition-shadow shadow-md resize-none"
-      ></textarea>
-  
-      <button
-        type="submit"
-        class="mt-4 bg-okau text-gray-900 font-extrabold py-4 rounded-2xl hover:bg-yellow-400 transition duration-300 shadow-lg w-full"
-      >
-        Send Message
-      </button>
-    </form>
-  
-    <div class="mt-10 text-gray-400 max-w-xl mx-auto space-y-3 text-left text-lg">
-      <p>
-        Email: 
-        <a href="mailto:your-email@example.com" class="text-okau hover:underline font-semibold">
-          ifemiponashoga@gmail.com
-        </a>
-      </p>
-      <p>
-        Phone: 
-        <a href="tel: 07018865409 " class="text-okau hover:underline font-semibold">
-          07018865409
-        </a>
-      </p>
-    </div>
-  </section>
-  
-  <footer
-  style="
-    background-color: #0e1a2b;
-    color: #fbbf24;
-    padding: 2rem 3rem;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    position: relative;
-  "
->
-  <p style="margin: 0 0 0.5rem 0; font-weight: 600;">
-    &copy; <span id="year"></span> Ifemipo Onashoga. All rights reserved.
-  </p>
-
-  <!-- Back to Top Button -->
-  <button
-    id="backToTopBtn"
-    title="Back to top"
-    style="
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: #fbbf24;
-      border: none;
-      padding: 0.7rem 1rem;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: 700;
-      box-shadow: 0 6px 12px rgb(251 191 36 / 0.5);
-      display: none;
-      z-index: 1000;
-      transition: background-color 0.3s ease;
-    "
-  >
-    ↑ Top
-  </button>
-</footer>
-<script>
-  // Dynamic Year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Back to Top button logic
-  const backToTopBtn = document.getElementById('backToTopBtn');
-
-  window.onscroll = function () {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-      backToTopBtn.style.display = "block";
-    } else {
-      backToTopBtn.style.display = "none";
     }
-  };
+  });
 
-  backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      lightboxOverlay.style.display = 'none';
+      lightboxOverlay.setAttribute('aria-hidden', 'true');
+    }
   });
 </script>
 
-</body>
-</html>
+    <!-- Contact Section -->
+    <section id="contact" class="max-w-3xl mx-auto my-20 p-10 bg-gray-800 rounded-3xl shadow-2xl text-center text-softWhite">
+      <h2 class="text-5xl font-extrabold text-okau mb-8 tracking-wide drop-shadow-lg">
+        Contact Me
+      </h2>
+    
+      <form action="https://formspree.io/f/your-form-id" method="POST" class="flex flex-col gap-6 max-w-xl mx-auto text-left">
+        <label class="block font-semibold text-lg text-gray-300 mb-1" for="name">Your Name</label>
+        <input
+          id="name"
+          type="text"
+          name="name"
+          placeholder="Enter your full name"
+          required
+          class="p-4 rounded-xl text-gray-900 font-semibold placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-okau focus:ring-opacity-60 transition-shadow shadow-md"
+        />
+    
+        <label class="block font-semibold text-lg text-gray-300 mb-1" for="email">Your Email</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="Enter your email address"
+          required
+          class="p-4 rounded-xl text-gray-900 font-semibold placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-okau focus:ring-opacity-60 transition-shadow shadow-md"
+        />
+    
+        <label class="block font-semibold text-lg text-gray-300 mb-1" for="message">Your Message</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Write your message here"
+          rows="6"
+          required
+          class="p-4 rounded-xl text-gray-900 font-semibold placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-okau focus:ring-opacity-60 transition-shadow shadow-md resize-none"
+        ></textarea>
+    
+        <button
+          type="submit"
+          class="mt-4 bg-okau text-gray-900 font-extrabold py-4 rounded-2xl hover:bg-yellow-400 transition duration-300 shadow-lg w-full"
+        >
+          Send Message
+        </button>
+      </form>
+    
+      <div class="mt-10 text-gray-400 max-w-xl mx-auto space-y-3 text-left text-lg">
+        <p>
+          Email: 
+          <a href="mailto:your-email@example.com" class="text-okau hover:underline font-semibold">
+            ifemiponashoga@gmail.com
+          </a>
+        </p>
+        <p>
+          Phone: 
+          <a href="tel: 07018865409 " class="text-okau hover:underline font-semibold">
+            07018865409
+          </a>
+        </p>
+      </div>
+    </section>
+    
+    <footer
+    style="
+      background-color: #0e1a2b;
+      color: #fbbf24;
+      padding: 2rem 3rem;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      position: relative;
+    "
+  >
+    <p style="margin: 0 0 0.5rem 0; font-weight: 600;">
+      &copy; <span id="year"></span> Ifemipo Onashoga. All rights reserved.
+    </p>
+
+    <!-- Back to Top Button -->
+    <button
+      id="backToTopBtn"
+      title="Back to top"
+      style="
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #fbbf24;
+        border: none;
+        padding: 0.7rem 1rem;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 700;
+        box-shadow: 0 6px 12px rgb(251 191 36 / 0.5);
+        display: none;
+        z-index: 1000;
+        transition: background-color 0.3s ease;
+      "
+    >
+      ↑ Top
+    </button>
+  </footer>
+  <script>
+    // Dynamic Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Back to Top button logic
+    const backToTopBtn = document.getElementById('backToTopBtn');
+
+    window.onscroll = function () {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.getElementById('menuToggle').addEventListener('click', () => {
+  const menu = document.getElementById('menuList');
+  menu.classList.toggle('hidden');
+});
+
+  </script>
+
+  </body>
+  </html>
