@@ -1,0 +1,109 @@
+/* Dark theme base */
+body {
+    margin: 0;
+    background-color: #121212;
+    color: #eee;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: #1e1e1e;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.8rem;
+    color: #61dafb;
+}
+
+header p {
+    margin: 0.3rem 0;
+    font-weight: 300;
+    font-size: 1.2rem;
+    color: #bbb;
+}
+
+.gallery {
+    max-width: 2000px;  /* wider container */
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.gallery h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: #61dafb;
+}
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  /* fixed 4 columns */
+    gap: 3rem;                             /* larger gaps */
+    grid-auto-rows: 350px;                 /* base row height */
+    grid-auto-flow: row;                   /* no dense packing */
+}
+
+/* Largest items: span 4 columns and 4 rows */
+.media-grid > *:nth-child(6n + 1) {
+    grid-column: span 4;
+    grid-row: span 4;
+    min-height: 800px;
+}
+
+/* Secondary big items: span 3 columns and 3 rows */
+.media-grid > *:nth-child(5n + 3) {
+    grid-column: span 3;
+    grid-row: span 3;
+    min-height: 600px;
+}
+
+/* Medium items: span 2 columns and 2 rows */
+.media-grid > *:nth-child(4n + 2) {
+    grid-column: span 2;
+    grid-row: span 2;
+    min-height: 400px;
+}
+
+.media-grid img,
+.media-grid video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 12px 28px rgba(97, 218, 251, 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    background-color: #222;
+}
+
+.media-grid img:hover,
+.media-grid video:hover {
+    transform: scale(1.1);
+    box-shadow: 0 20px 48px rgba(97, 218, 251, 0.85);
+}
+
+video {
+    outline: none;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background: #1e1e1e;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #61dafb;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

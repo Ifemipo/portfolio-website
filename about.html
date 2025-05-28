@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Me | Ifemipo Onashoga</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      background-color: #0e1a2b;
+      color: #e0e7ff;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    #backgroundImage {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: url('/images/background2.jpg') center center/cover no-repeat;
+      filter: blur(10px) brightness(0.5);
+      z-index: 0;
+      transition: filter 0.5s ease;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background-color: rgba(14, 26, 43, 0.85);
+      z-index: 1;
+    }
+
+    /* Sticky Nav Bar */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #0e1a2bcc;
+      backdrop-filter: saturate(180%) blur(10px);
+      border-bottom: 1px solid #fbbf24;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 2rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    nav .logo {
+      color: #fbbf24;
+      font-family: 'Anton', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      cursor: default;
+      user-select: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      color: #fbbf24;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: #f59e0b;
+      outline: none;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      width: 25px;
+      height: 18px;
+      justify-content: space-between;
+    }
+
+    .hamburger div {
+      height: 3px;
+      background: #fbbf24;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Mobile Menu */
+    @media (max-width: 768px) {
+      nav ul {
+        position: fixed;
+        top: 60px;
+        right: 0;
+        background-color: #0e1a2b;
+        height: calc(100vh - 60px);
+        width: 200px;
+        flex-direction: column;
+        padding-top: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        box-shadow: -2px 0 8px rgba(0,0,0,0.4);
+      }
+
+      nav ul.active {
+        transform: translateX(0);
+      }
+
+      nav ul li {
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* Hamburger animation when active */
+    .hamburger.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active div:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Main content grid */
+    main#aboutPage {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 5rem auto 4rem auto; /* space below nav */
+      padding: 0 3rem;
+      box-sizing: border-box;
+      align-items: start;
+      text-align: left;
+      min-height: 80vh;
+    }
+
+    @media (max-width: 900px) {
+      main#aboutPage {
+        grid-template-columns: 1fr;
+        padding: 0 2rem;
+        height: auto;
+        margin-top: 6rem;
+      }
+    }
+
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 550px;
+    }
+
+
+    h1 {
+      font-family: 'Anton', sans-serif;
+      font-weight: 790;
+      font-size: 1rem;
+      color: #fbbf24;
+      margin: 0;
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 10px rgb(251 191 36 / 0.9);
+      line-height: 1.05;
+    }
+
+
+    p.about-text {
+      font-weight: 600;
+      font-size: 1.3rem;
+      line-height: 1.9;
+      color: #d1d5db;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 400px;
+      position: relative;
+    }
+
+    .skill-category {
+      background: rgba(251, 191, 36, 0.1);
+      border-left: 6px solid #fbbf24;
+      padding: 1.5rem 1.8rem;
+      border-radius: 10px;
+      color: #fbbf24;
+      font-weight: 600;
+      font-size: 1.2rem;
+      box-shadow: 0 6px 12px rgb(251 191 36 / 0.3);
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      user-select: none;
+      position: relative;
+      transition: background-color 0.3s ease;
+    }
+
+    .skill-category:hover {
+      background: rgba(251, 191, 36, 0.25);
+    }
+
+    .skill-list {
+      margin-top: 0.8rem;
+      padding-left: 1.25rem;
+      list-style-type: none;
+      color: #fef3c7;
+      font-weight: 600;
+      font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      display: none;
+    }
+
+    .skill-list li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Progress bar styles */
+    .progress-bar {
+      background: #ddd;
+      border-radius: 10px;
+      width: 100px;
+      height: 10px;
+      margin-left: 1rem;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: #fbbf24;
+      border-radius: 10px 0 0 10px;
+    }
+
+    
+
+    /* Back to home button */
+    .back-home {
+      display: inline-block;
+      margin-top: 3rem;
+      background-color: #fbbf24;
+      color: #0e1a2b;
+      font-weight: 700;
+      font-size: 1.15rem;
+      padding: 0.75rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 8px 15px rgb(251 191 36 / 0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      max-width: fit-content;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .back-home:hover {
+      background-color: #f59e0b;
+      box-shadow: 0 12px 20px rgb(245 158 11 / 0.7);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 4.5rem;
+      }
+      p.about-text {
+        font-size: 1.15rem;
+      }
+      .skill-category {
+        font-size: 1.1rem;
+      }
+      section#experience h2 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 3.5rem;
+      }
+      p.about-text {
+        font-size: 14rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="backgroundImage"></div>
+  <div id="overlay"></div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="logo">Ifemipo</div>
+    <ul id="nav-links">
+      <li><a href="#about-section">About Me</a></li>
+      <li><a href="#skills-section">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu" tabindex="0" role="button">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main id="aboutPage" class="animate__animated animate__fadeInUp">
+
+    <!-- LEFT COLUMN ABOUT -->
+    <section id="about-section" class="left-column">
+      <h1>About Me</h1>
+
+      <p class="about-text">
+        I am a multidisciplinary creative professional specializing in frontend development, UI design, and 3D art using Blender. I blend technical expertise with artistic vision to craft immersive and user-friendly digital experiences.
+      </p>
+
+      <p class="about-text">
+        My goal is to create innovative web experiences that combine clean, performant code with engaging UI and interactive 3D elements. I’m passionate about integrating design and development to deliver memorable digital products.
+      </p>
+
+      <p class="about-text">
+        I've worked on several personal and freelance projects where I combined frontend development with UI and 3D design to create immersive user experiences.
+      </p>
+
+      <a href="index.html" class="back-home animate__animated animate__fadeInUp">Back to Home</a>
+    </section>
+
+    <!-- RIGHT COLUMN SKILLS -->
+    <section id="skills-section" class="right-column">
+
+      <div class="skill-category" tabindex="0" aria-expanded="false" aria-controls="frontendSkills" role="button">
+        Frontend Development
+      </div>
+      <ul class="skill-list" id="frontendSkills" aria-hidden="true">
+        <li>HTML <div class="progress-bar"><div class="progress-bar-fill" style="width: 80%;"></div></div> 80%</li>
+        <li>CSS<div class="progress-bar"><div class="progress-bar-fill" style="width: 65%;"></div></div> 65%</li>
+        <li>JAVASCRIPT <div class="progress-bar"><div class="progress-bar-fill" style="width: 75%;"></div></div> 55%</li>
+        <li>TypeScript <div class="progress-bar"><div class="progress-bar-fill" style="width: 70%;"></div></div> 70%</li>
+      </ul>
+
+      <div class="skill-category" tabindex="0" aria-expanded="false" aria-controls="uiSkills" role="button">
+        UI Design
+      </div>
+      <ul class="skill-list" id="uiSkills" aria-hidden="true">
+        <li>Figma <div class="progress-bar"><div class="progress-bar-fill" style="width: 90%;"></div></div> 90%</li>
+        <li>Adobe XD <div class="progress-bar"><div class="progress-bar-fill" style="width: 75%;"></div></div> 75%</li>
+        <li>Sketch <div class="progress-bar"><div class="progress-bar-fill" style="width: 60%;"></div></div> 60%</li>
+      </ul>
+
+      <div class="skill-category" tabindex="0" aria-expanded="false" aria-controls="artSkills" role="button">
+        3D Art (Blender)
+      </div>
+      <ul class="skill-list" id="artSkills" aria-hidden="true">
+        <li>Modeling <div class="progress-bar"><div class="progress-bar-fill" style="width: 80%;"></div></div> 80%</li>
+        <li>Texturing <div class="progress-bar"><div class="progress-bar-fill" style="width: 70%;"></div></div> 70%</li>
+        <li>Animation <div class="progress-bar"><div class="progress-bar-fill" style="width: 65%;"></div></div> 65%</li>
+      </ul>
+
+    </section>
+  </main>
+
+
+  <script>
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    hamburger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        hamburger.click();
+      }
+    });
+
+    // Collapsible skill categories
+    const skillCategories = document.querySelectorAll('.skill-category');
+
+    skillCategories.forEach(category => {
+      category.addEventListener('click', () => {
+        const listId = category.getAttribute('aria-controls');
+        const list = document.getElementById(listId);
+        const expanded = category.getAttribute('aria-expanded') === 'true';
+
+        category.setAttribute('aria-expanded', !expanded);
+        if (!expanded) {
+          list.style.display = 'block';
+          list.setAttribute('aria-hidden', 'false');
+        } else {
+          list.style.display = 'none';
+          list.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      category.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          category.click();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
